@@ -6,17 +6,17 @@ import "./scss/app.scss";
 
 function App() {
   return (
-    <div class="wrapper">
+    <div className="wrapper">
       <Header />
-      <div class="content">
-        <div class="container">
-          <div class="content__top">
+      <div className="content">
+        <div className="container">
+          <div className="content__top">
             <Categories />
             <Sort />
           </div>
-          <h2 class="content__title">Все пиццы</h2>
-          <div class="content__items">
-            <PizzaBlock title="мексиканская" cost={'500'}/>
+          <h2 className="content__title">Все пиццы</h2>
+          <div className="content__items">
+            <PizzaBlock title="мексиканская" price={"500"} />
             <PizzaBlock />
             <PizzaBlock />
             <PizzaBlock />
