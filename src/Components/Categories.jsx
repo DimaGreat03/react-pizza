@@ -8,7 +8,12 @@ function Categories() {
     <div className="categories">
       <ul>
         {categories.map((value, i) => (
-          <li className={activeIndex === i && "active"} onClick={() => setActiveIndex(i)}> {value} </li>
+          <li key={i}
+          className={activeIndex === i? "active" : ""} 
+          onClick={() => setActiveIndex(i)}
+          > 
+          {value} 
+          </li>
         ))}
       </ul>
       <button onClick={() => setCategorie([...categories, 'Арс Лол'])}>+</button>
