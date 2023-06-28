@@ -7,24 +7,36 @@ import PizzaBlock from "../Components/PizzaBlock";
 const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [categoryId, setCategoryId] = React.useState("");
+  const [sortType, setSortType] = React.useState({
+    name: "популярности",
+    sort: "rating",
+  });
+  const order = sortType.sort.includes("-") ? "asc" : "desc";
+  const sortBy = sortType.sort.replace("-", "");
+  const category = categoryId > 0 ? `category=${categoryId}` : "";
 
   React.useEffect(() => {
-    fetch("https://649299ad428c3d2035d05219.mockapi.io/items")
+    setIsLoading(true);
+    fetch(
+      `https://649299ad428c3d2035d05219.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`
+    )
       .then((response) => response.json())
       .then((arr) => {
-        setTimeout(() => {
-          setItems(arr);
-          setIsLoading(false);
-        }, 200);
+        setItems(arr);
+        setIsLoading(false);
       });
-      window.scroll(0, 0)
-  }, []);
+    window.scroll(0, 0);
+  }, [categoryId, sortType]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories
+          value={categoryId}
+          onChangeCategory={(i) => setCategoryId(i)}
+        />
+        <Sort value={sortType} onChangeSort={(obj) => setSortType(obj)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
